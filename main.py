@@ -1,4 +1,4 @@
-from utils.data import *
+from config import *
 from src.Modes.Fullscreen import Ui_Fullscreen
 from src.Modes.Splitscreen import Ui_Splitscreen
 from src.Modes.Trucks import Ui_Truckscreen
@@ -36,12 +36,9 @@ class Main(QtWidgets.QMainWindow):
 
     def getOption(self):
         try:
-            print(self.modeChange)
-            print(self.mode, self.current_mode)
             if self.current_mode is not self.mode or self.modeChange == True:
                 self.hasChangedDisplayMode = True
                 self.current_mode = self.mode
-                print('hasChanged set to True')
             if self.mode == 3:
                 if self.index > 4:
                     if len(self.medias) != 5:
@@ -63,24 +60,23 @@ class Main(QtWidgets.QMainWindow):
 
             elif self.mode == 1 and self.hasChangedDisplayMode == True:
                 self.ui = Ui_Splitscreen()
-                print('split')
 
             elif self.mode == 0 or self.mode == 4 and self.hasChangedDisplayMode == True:
                 self.ui = Ui_Fullscreen(1000)
 
             if self.hasChangedDisplayMode and self.mode != 3:
-                print(self.hasChangedDisplayMode)
-                print('reloading ui')
                 self.hasChangedDisplayMode = False
                 self.noMedia = True
-                self.modeChange = req("put", ip_mode_put, {'modeChange': False})
-                print('hasChanged set to False')
+                try:
+                    self.modeChange = req("put", ip_mode_put, {'modeChange': False})
+                except:
+                    print("Can't put modeChange to false at " + ip_mode_put)
 
                 self.ui.setupUi(self)
 
             return self.index
         except:
-            print("cant fetch datas")
+            print("Can't update mode, current mode is " + str(self.mode))
 
     def updateMode(self):
         try:
@@ -88,11 +84,11 @@ class Main(QtWidgets.QMainWindow):
             self.modeBack = int(req("get", ip_mode).json()[0]['modeBack'])
             self.modeChange = req("get", ip_mode).json()[0]['modeChange']
         except:
-            print("cant fetch modes")
+            print("Can't fetch mode options at " + ip_mode)
         try:
             self.medias = req("get", ip_fs).json()
         except:
-            print("cant fetch assets")
+            print("Can't fetch media path at " + ip_fs)
         try:
             # jours de la semaine
             self.week_start = req("get", ip_sb).json()[0]['start'].split(":")
@@ -104,7 +100,7 @@ class Main(QtWidgets.QMainWindow):
             self.sunday_start = req("get", ip_sb).json()[2]['start'].split(":")
             self.sunday_stop = req("get", ip_sb).json()[2]['stop'].split(":")
         except:
-            print("cant fetch shutdown hours")
+            print("Can't fetch shutdown time at " + ip_sb)
 
     def screenBlanking(self):
         now = datetime.now()
@@ -135,15 +131,21 @@ class Main(QtWidgets.QMainWindow):
                                        self.week_stop[1] > self.current_minute) else self.display("off")
 
         except:
-            print('start and stop not init')
+            print('Screen blanking error - value not found, they might not have been initialised yet')
 
     def display(self, state):
         if state == "on" and self.veille == False:
-            requests.put(ip_mode_put, data={'activeMode': self.modeBack})
-            self.veille = True
+            try:
+                requests.put(ip_mode_put, data={'activeMode': self.modeBack})
+                self.veille = True
+            except:
+                print("Can't put 'stop screensaver' to modeBack at " + ip_mode_put)
         elif state == "off" and self.veille == True:
-            requests.put(ip_mode_put, data={'activeMode': '0'})
-            self.veille = False
+            try:
+                requests.put(ip_mode_put, data={'activeMode': '0'})
+                self.veille = False
+            except:
+                print("Can't put 'start screensaver' to modeBack at " + ip_mode_put)
 
 
 if __name__ == '__main__':

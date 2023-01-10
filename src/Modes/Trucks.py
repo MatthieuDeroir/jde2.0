@@ -1,20 +1,13 @@
-from utils.data import *
+from config import *
 from src.Labels.DataLabel import DataLabel
 
 
 class Ui_Truckscreen(QMainWindow):
-    def fetchData(self):
-        try:
-            self.pathFullScreen = req("get", ip_fs).json()
-        except:
-            print("can't get fs path ")
+    def __init__(self):
+        super().__init__()
+        self.timer = QTimer()
 
     def setupUi(self, MainWindow):
-        try:
-            self.media = req("get", ip_fs).json()
-        except:
-            print("can't get assets")
-        self.timer = QTimer()
         MainWindow.setObjectName("MainWindow")
         MainWindow.setEnabled(True)
         MainWindow.resize(screen_width, screen_height)

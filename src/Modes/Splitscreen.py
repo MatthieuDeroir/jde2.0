@@ -1,4 +1,4 @@
-from utils.data import *
+from config import *
 from src.Labels.DisplayLabel import DisplayLabel
 
 

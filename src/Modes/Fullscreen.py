@@ -1,4 +1,4 @@
-from utils.data import *
+from config import *
 from src.Labels.DisplayLabel import DisplayLabel
 
 
@@ -47,7 +47,10 @@ class Ui_Fullscreen(object):
                 self.display_label.setGeometry(QtCore.QRect(0, 0, screen_width, screen_height))
                 self.display_label.setScaledContents(True)
         except:
-            print("cant fetch datas")
+            print(
+                "Can't fetch the required data to determine whether it's an image or a video"
+                " to display a FullScreen media."
+                " Check your connection. (Fullscreen.py)")
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)

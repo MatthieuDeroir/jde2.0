@@ -1,4 +1,4 @@
-from utils.data import *
+from config import *
 from src.Labels.DisplayLabel import DisplayLabel
 
 
@@ -19,7 +19,7 @@ class Ui_Shutdown(object):
 
         self.display_label = DisplayLabel(self.centralwidget, self.index)
         self.display_label.setObjectName("display_label")
-        self.display_label.setStyleSheet("background-image:url(./assets/fullscreenBlack.png)")
+        self.display_label.setStyleSheet("background-image:url(./assets/blackScreen.png)")
         self.display_label.setGeometry(QtCore.QRect(0, 0, screen_width, screen_height))
 
         self.retranslateUi(MainWindow)

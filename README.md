@@ -1,1 +1,3 @@
-# jde-qt
+# AFFICHEUR JDE
+# =============
+
