@@ -1,4 +1,17 @@
+#system import
+import sys
+from datetime import datetime
+import requests
+
+#custom module import
 from utils.req import req
+
+#pyqt5 import
+from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5.QtCore import QTimer, Qt, QUrl
+from PyQt5.QtWidgets import QVBoxLayout,QLabel, QMainWindow
+from PyQt5.QtMultimedia import QMediaContent, QMediaPlayer
+from PyQt5.QtMultimediaWidgets import QVideoWidget
 
 screen_width = 192
 screen_height = 433

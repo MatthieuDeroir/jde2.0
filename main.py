@@ -1,14 +1,7 @@
-import sys
-from Trucks import Ui_Truckscreen
-from Fullscreen import Ui_Fullscreen
-from Splitscreen import Ui_Splitscreen
-from Shutdown import Ui_Shutdown
-from PyQt5.QtGui import QPalette
-from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtCore import QTimer, QDateTime, Qt
 from data import *
-from datetime import datetime
-import requests
+from src.Fullscreen import Ui_Fullscreen
+from src.Splitscreen import Ui_Splitscreen
+from src.Trucks import Ui_Truckscreen
 
 
 class Main(QtWidgets.QMainWindow):
@@ -36,7 +29,6 @@ class Main(QtWidgets.QMainWindow):
         self.getOption()
         self.timer = QTimer(self)
         self.timer.start(1000)
-        # self.timer.start(media . duration)
 
         self.timer.timeout.connect(self.updateMode)
         self.timer.timeout.connect(self.getOption)
@@ -53,47 +45,42 @@ class Main(QtWidgets.QMainWindow):
             if self.mode == 3:
                 if self.index > 4:
                     if len(self.medias) != 5:
-                        self.timer.start(self.medias[self.index]['duration']  * 1000 )         
-                        self.ui = Ui_Fullscreen(self.index)  
+                        self.timer.start(self.medias[self.index]['duration'] * 1000)
+                        self.ui = Ui_Fullscreen(self.index)
                         self.ui.setupUi(self)
                         self.noMedia = True
-                    if self.index >= len(self.medias)- 1:
+                    if self.index >= len(self.medias) - 1:
                         self.index = 3
                 elif self.index == 4 and self.noMedia == True:
-                    self.timer.start(self.medias[self.index]['duration']  * 1000 ) 
+                    self.timer.start(self.medias[self.index]['duration'] * 1000)
                     self.ui = Ui_Truckscreen()
                     self.ui.setupUi(self)
                     self.noMedia = False
-                
-                self.index =  self.index +1  
+
+                self.index = self.index + 1
             elif self.mode == 2 and self.hasChangedDisplayMode == True:
                 self.ui = Ui_Fullscreen(0)
-                
+
             elif self.mode == 1 and self.hasChangedDisplayMode == True:
                 self.ui = Ui_Splitscreen()
                 print('split')
-                
+
             elif self.mode == 0 or self.mode == 4 and self.hasChangedDisplayMode == True:
                 self.ui = Ui_Fullscreen(1000)
-                
+
             if self.hasChangedDisplayMode and self.mode != 3:
                 print(self.hasChangedDisplayMode)
                 print('reloading ui')
                 self.hasChangedDisplayMode = False
                 self.noMedia = True
-                #requests.put(ip_mode_put, data={'modeChange': False})
                 self.modeChange = req("put", ip_mode_put, {'modeChange': False})
                 print('hasChanged set to False')
 
                 self.ui.setupUi(self)
 
-
-               
-
-        
             return self.index
         except:
-              print("cant fetch datas")
+            print("cant fetch datas")
 
     def updateMode(self):
         try:
@@ -124,10 +111,10 @@ class Main(QtWidgets.QMainWindow):
         self.current_hour = now.strftime("%H")
         self.current_minute = now.strftime("%M")
         self.current_days = now.strftime("%A")
-        #print("Il est ", self.current_hour, ":", self.current_minute, self.current_days)
+        # print("Il est ", self.current_hour, ":", self.current_minute, self.current_days)
         try:
-            #print("La veille est prévue entre ", self.week_start[0], ":", self.week_start[1], " et ", self.week_stop[0],
-             #     ":", self.week_stop[1])
+            # print("La veille est prévue entre ", self.week_start[0], ":", self.week_start[1], " et ", self.week_stop[0],
+            #     ":", self.week_stop[1])
 
             if (self.current_days == "Sunday"):
 
@@ -170,7 +157,6 @@ if __name__ == '__main__':
     mode = 3
     medias = []
     index = 3
-    
 
     app = QtWidgets.QApplication(sys.argv)
     main = Main(mode)
