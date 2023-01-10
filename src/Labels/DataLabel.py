@@ -1,4 +1,4 @@
-from data import *
+from utils.data import *
 
 class DataLabel(QLabel):
     def __init__(self, widget, index, category):
@@ -32,7 +32,7 @@ class DataLabel(QLabel):
                 else:
                     self.data = ''
 
-            if (self.category is 'state' or self.category is 'dock') and fetched_datas[self.index]['plate'] == '':
+            if (self.category == 'state' or self.category == 'dock') and fetched_datas[self.index]['plate'] == '':
                 self.data = ''
 
             self.setText(self.data)
@@ -49,9 +49,9 @@ class DataLabel(QLabel):
             print("cant fetch datas")
 
     def blink(self):
-        if self.flag == 1 and self.data is 'COME':
+        if self.flag == 1 and self.data == 'COME':
             self.setStyleSheet("color: #66FF22")
             self.flag = 0
-        elif self.flag == 0 and self.data is 'COME':
+        elif self.flag == 0 and self.data == 'COME':
             self.setStyleSheet("color: #006400")
             self.flag = 1

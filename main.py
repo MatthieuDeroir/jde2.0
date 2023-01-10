@@ -1,7 +1,7 @@
-from data import *
-from src.Fullscreen import Ui_Fullscreen
-from src.Splitscreen import Ui_Splitscreen
-from src.Trucks import Ui_Truckscreen
+from utils.data import *
+from src.Modes.Fullscreen import Ui_Fullscreen
+from src.Modes.Splitscreen import Ui_Splitscreen
+from src.Modes.Trucks import Ui_Truckscreen
 
 
 class Main(QtWidgets.QMainWindow):
@@ -92,7 +92,7 @@ class Main(QtWidgets.QMainWindow):
         try:
             self.medias = req("get", ip_fs).json()
         except:
-            print("cant fetch medias")
+            print("cant fetch assets")
         try:
             # jours de la semaine
             self.week_start = req("get", ip_sb).json()[0]['start'].split(":")
@@ -111,11 +111,7 @@ class Main(QtWidgets.QMainWindow):
         self.current_hour = now.strftime("%H")
         self.current_minute = now.strftime("%M")
         self.current_days = now.strftime("%A")
-        # print("Il est ", self.current_hour, ":", self.current_minute, self.current_days)
         try:
-            # print("La veille est prévue entre ", self.week_start[0], ":", self.week_start[1], " et ", self.week_stop[0],
-            #     ":", self.week_stop[1])
-
             if (self.current_days == "Sunday"):
 
                 self.display("on") if ((
@@ -142,9 +138,6 @@ class Main(QtWidgets.QMainWindow):
             print('start and stop not init')
 
     def display(self, state):
-        # print("PROCESS", state)
-        # subprocess.Popen(["xset", "-d", ":0", "dpms", "force",
-        #              state], stdout=subprocess.PIPE)
         if state == "on" and self.veille == False:
             requests.put(ip_mode_put, data={'activeMode': self.modeBack})
             self.veille = True

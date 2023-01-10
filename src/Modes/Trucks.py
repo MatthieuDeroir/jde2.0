@@ -1,5 +1,5 @@
-from data import *
-from src.DataLabel import DataLabel
+from utils.data import *
+from src.Labels.DataLabel import DataLabel
 
 
 class Ui_Truckscreen(QMainWindow):
@@ -13,7 +13,7 @@ class Ui_Truckscreen(QMainWindow):
         try:
             self.media = req("get", ip_fs).json()
         except:
-            print("can't get medias")
+            print("can't get assets")
         self.timer = QTimer()
         MainWindow.setObjectName("MainWindow")
         MainWindow.setEnabled(True)

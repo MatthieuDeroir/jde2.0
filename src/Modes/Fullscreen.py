@@ -1,13 +1,13 @@
-from data import *
-from src.DisplayLabel import DisplayLabel
+from utils.data import *
+from src.Labels.DisplayLabel import DisplayLabel
 
 
 class Ui_Fullscreen(object):
     def __init__(self, index):
         self.index = index
-        self.path = "../"
+        self.path = "../../"
         self.format = ""
-        self.current_path = '../'
+        self.current_path = '../../'
         timer = QTimer()
         timer.start(1000)  # Update the UI every 1 second
         timer.timeout.connect(self.setupUi)

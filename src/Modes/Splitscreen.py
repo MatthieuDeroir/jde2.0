@@ -1,5 +1,5 @@
-from data import *
-from src.DisplayLabel import DisplayLabel
+from utils.data import *
+from src.Labels.DisplayLabel import DisplayLabel
 
 
 class Ui_Splitscreen(object):

@@ -1,4 +1,4 @@
-from data import *
+from utils.data import *
 
 class DisplayLabel(QLabel):
     def __init__(self, widget, pos):
@@ -12,11 +12,11 @@ class DisplayLabel(QLabel):
         self.setScaledContents(True)
         self.setStyleSheet("width:192px;")
 
-        self.path = "../"
+        self.path = "../../"
 
     def fetchData(self):
         if self.pos == -1:
-            self.path = "../medias/fullscreenBlack.png"
+            self.path = "../../assets/fullscreenBlack.png"
         else:
             try:
                 fetched_datas = req("get", ip_fs).json()
