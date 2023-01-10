@@ -37,4 +37,5 @@ class DisplayLabel(QLabel):
                 "background-image:url(" + path_to_media + self.path + "); "
                                                                       "background-repeat: no-repeat;"
                                                                       "width:192px;")
+            self.setMaximumWidth(192)
 
