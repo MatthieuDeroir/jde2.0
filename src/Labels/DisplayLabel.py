@@ -38,4 +38,3 @@ class DisplayLabel(QLabel):
                                                                       "background-repeat: no-repeat;"
                                                                       "width:192px;")
             self.setMaximumWidth(192)
-
