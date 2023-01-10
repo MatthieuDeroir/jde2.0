@@ -1,2 +1,11 @@
-/__pycache__/
+.DS_Store
+__pycache__/
 
+assets/.DS_Store
+
+src/.DS_Store
+src/Labels/__pycache__/
+src/Modes/__pycache__/
+
+utils/.DS_Store
+utils/__pycache__/
