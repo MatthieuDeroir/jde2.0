@@ -36,11 +36,8 @@ class Ui_Fullscreen(object):
             else:
                 self.centralwidget = QtWidgets.QWidget(MainWindow)
                 self.centralwidget.setObjectName("centralwidget")
-                self.label = QtWidgets.QLabel(self.centralwidget)
-                self.label.setGeometry(QtCore.QRect(0, 0, screen_width, screen_height))
-                self.label.setObjectName("label")
+                self.centralwidget.setMaximumWidth(screen_width)
                 MainWindow.setCentralWidget(self.centralwidget)
-
                 self.display_label = DisplayLabel(self.centralwidget, self.index)
                 self.display_label.setObjectName("display_label")
 
@@ -49,7 +46,7 @@ class Ui_Fullscreen(object):
         except:
             print(
                 "Can't fetch the required data to determine whether it's an image or a video"
-                " to display a FullScreen media."
+                " to display as a FullScreen media."
                 " Check your connection. (Fullscreen.py)")
 
         self.retranslateUi(MainWindow)

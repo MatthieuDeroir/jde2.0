@@ -19,6 +19,7 @@ class Ui_Splitscreen(object):
         self.display_label_1.setObjectName("display_label_1")
         self.display_label_1.setGeometry(
             QtCore.QRect(0, 0 + (screen_height / 3 * self.line), screen_width, screen_height / 3))
+        self.display_label_1.setScaledContents(True)
 
         self.line = 1
 
@@ -26,6 +27,7 @@ class Ui_Splitscreen(object):
         self.display_label_2.setObjectName("display_label_2")
         self.display_label_2.setGeometry(
             QtCore.QRect(0, 0 + (screen_height / 3 * self.line), screen_width, screen_height / 3))
+        self.display_label_2.setScaledContents(True)
 
         self.line = 2
 
@@ -33,6 +35,7 @@ class Ui_Splitscreen(object):
         self.display_label_3.setObjectName("display_label_3")
         self.display_label_3.setGeometry(
             QtCore.QRect(0, 0 + (screen_height / 3 * self.line), screen_width, screen_height / 3))
+        self.display_label_3.setScaledContents(True)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
