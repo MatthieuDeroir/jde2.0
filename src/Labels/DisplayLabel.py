@@ -36,5 +36,5 @@ class DisplayLabel(QLabel):
             self.setStyleSheet(
                 "background-image:url(" + path_to_media + self.path + "); "
                                                                       "background-repeat: no-repeat;"
-                                                                      "background-size: contain;width:192px;")
+                                                                      "width:192px;")
 
